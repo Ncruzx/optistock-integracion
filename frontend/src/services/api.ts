@@ -1,4 +1,4 @@
-const API_BASE = "http://127.0.0.1:8000";
+const API_BASE = "https://optistock-api-e249.onrender.com";
 
 export const getEquipos = async () => {
   const res = await fetch(`${API_BASE}/equipos`);

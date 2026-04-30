@@ -8,7 +8,7 @@ import EquipoModal from '@/components/EquipoModal';
 import { Toaster, toast } from 'react-hot-toast';
 
 interface Equipo {
-  id: number;
+  id?: number;
   nombre: string;
   marca: string;
   serie: string;
@@ -110,8 +110,11 @@ export default function Dashboard() {
     }
   };
 
-  const removeEquipo = async (id: number) => {
+  const removeEquipo = async (id?: number) => {
     try {
+      if (!id) {
+        throw new Error('ID requerido para eliminar');
+      }
       await deleteEquipo(id);
       setEquipos(equipos.filter(e => e.id !== id));
       await updateStats();
@@ -140,7 +143,7 @@ export default function Dashboard() {
                          equipo.mac.toLowerCase().includes(searchTerm.toLowerCase());
     const matchesFilter = filter === 'Todos' || equipo.estado === filter;
     return matchesSearch && matchesFilter;
-  });
+  }).filter(e => e.id !== undefined) as (Equipo & { id: number })[];
 
   return (
     <div className="min-h-screen bg-slate-950 p-8">

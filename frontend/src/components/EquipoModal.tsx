@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { X } from 'lucide-react';
 
 interface Equipo {
-  id: number;
+  id?: number;
   nombre: string;
   marca: string;
   serie: string;
